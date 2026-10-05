@@ -1,4 +1,4 @@
-class ChatRoomController < AbstractController::Base
+class ChatRoomController < ApplicationController
   def index
     puts "This is index route"
   end
