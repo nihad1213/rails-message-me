@@ -1,33 +1,45 @@
 <!DOCTYPE html>
+<html> 
+<head> 
+  <title><%= content_for(:title) || "Rails Message Me" %></title>
 
-<html> <head> <title><%= content_for(:title) || "Rails Message Me" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Rails Message Me">
+  <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="application-name" content="Rails Message Me">
-<meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-<%= csrf_meta_tags %>
-<%= csp_meta_tag %>
+  <%= yield :head %>
 
-<%= yield :head %>
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
 
-<link rel="icon" href="/icon.png" type="image/png">
-<link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon.png">
+  <!-- 1. Semantic UI CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 
-<!-- Semantic UI -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css"
->
+  <!-- 2. jQuery (Must be in head BEFORE application scripts) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-<%= javascript_importmap_tags %>
+  <!-- 3. Semantic UI JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
 </head>
 
-<body> <%= yield %>
+<body> 
+  <%= render 'layouts/navigation' %>
 
-<!-- Semantic UI JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+  <%= yield %>
+
+  <!-- Initialize Dropdown with safety check -->
+  <script>
+    document.addEventListener("turbo:load", function() {
+      $('.ui.dropdown').dropdown();
+    });
+  </script>
+</body>
+</html>
