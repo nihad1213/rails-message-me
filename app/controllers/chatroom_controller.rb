@@ -1,5 +1,8 @@
 class ChatroomController < ApplicationController
+  before_action :require_user
+
   def index
-    puts "This is index route"
+    @messages = Message.includes(:user).recent
+    @message  = Message.new
   end
 end
