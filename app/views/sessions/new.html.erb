@@ -1,0 +1,9 @@
+<div class="ui container" style="margin-top: 2em; max-width: 450px !important;">
+  <h2 class="ui header">Log In</h2>
+
+  <%= form_with url: login_path, class: "ui form" do |f| %>
+    <div class="field"><%= f.label :username %><%= f.text_field :username %></div>
+    <div class="field"><%= f.label :password %><%= f.password_field :password %></div>
+    <%= f.submit "Log In", class: "ui primary button" %>
+  <% end %>
+</div>

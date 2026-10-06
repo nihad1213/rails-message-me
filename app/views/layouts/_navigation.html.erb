@@ -1,21 +1,25 @@
 <header>
   <div class="ui small inverted menu">
     <div class="ui container">
-      <a class="item">Home</a>
-      <a class="item">Messages</a>
-      
+      <a class="item" href="<%= root_path %>">Home</a>
+      <a class="item" href="<%= root_path %>">Messages</a>      
+
       <div class="right menu">
-        <!-- Account Dropdown Menu -->
-        <div class="ui dropdown item">
-          Account <i class="dropdown icon"></i>
-          <div class="menu">
-            <a class="item" href="#">Account Settings</a>
-            <a class="item" href="#">Log Out</a>
+        <% if logged_in? %>
+          <div class="ui dropdown item">
+            <%= current_user.username %> <i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item" href="#">Account Settings</a>
+              <%= button_to "Log Out", logout_path, method: :delete, class: "item",
+                            form: { style: "display:contents" } %>
+            </div>
           </div>
-        </div>
-        <div class="item">
-          <div class="ui primary button">Sign Up</div>
-        </div>
+        <% else %>
+          <a class="item" href="<%= login_path %>">Log In</a>
+          <div class="item">
+            <%= link_to "Sign Up", signup_path, class: "ui primary button" %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
